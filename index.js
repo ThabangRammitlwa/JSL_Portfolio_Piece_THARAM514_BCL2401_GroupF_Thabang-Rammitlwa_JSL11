@@ -205,7 +205,7 @@ function addTask(event) {
     const task = {
       addTask: elements.addTask.value,
       dueDate: elements.dueDate.value,
-      priority: elements.priority.value,
+      currentStatus: elements.currentStatus.value,
     };
     const newTask = createNewTask(task);
     if (newTask) {
@@ -228,18 +228,27 @@ function toggleTheme() {
 
 
 
-function openEditTaskModal(task) {
+function openEditTaskModal(task) { 
   // Set task details in modal inputs
+  document.getElementById(title)
+  document.getElementById(description)
+  document.getElementById(currentStatus)
   
 
   // Get button elements from the task modal
-
+const createTaskBtn=document.getElementById(create-task-btn);
+const cancelAddTaskBtn=document.getElementById(cancel)
 
   // Call saveTaskChanges upon click of Save Changes button
- 
+  document.getElementById(saveChangesBtn).addEventListener('click', () => {
+    saveTaskChanges(task.id);
+  });
 
   // Delete task using a helper function and close the task modal
-
+function deleteTask(taskId) {
+  closeModal.addEventListener('click', () => {
+    toggleModal(false, elements.editTaskModal);
+  });
 
   toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
