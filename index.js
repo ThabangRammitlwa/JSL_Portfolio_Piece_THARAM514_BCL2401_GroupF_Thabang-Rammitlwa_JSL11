@@ -21,12 +21,12 @@ function initializeData() {
 // TASK: Get elements from the DOM
 const elements = {
   headerBoardName:document.getElementById("header-board-name"),
-  columnDivs: document.querySelectorAll('column'),
-  sideBar: document.querySelector('.side-bar'),
+  columnDivs: document.querySelectorAll('column-div'),
+ // sideBar: document.querySelector('.side-bar'),
   showSideBarBtn: document.getElementById('show-side-bar-btn'),
   hideSideBarBtn: document.getElementById('hide-side-bar-btn'),
   themeSwitch: document.getElementById('switch'),
-  filterDiv: document.getElementById('filterDiv'),
+  filterDiv: document.getElementById('filter-div'),
   createNewTaskBtn: document.getElementById('add-task-modal-window'),
   modalWindow: document.getElementById('new-task-modal-window'),
   editTaskModal: document.querySelector('.edit-task-modal-window')
@@ -205,7 +205,7 @@ function addTask(event) {
     const task = {
       addTask: elements.addTask.value,
       dueDate: elements.dueDate.value,
-      currentStatus: elements.currentStatus.value,
+      description: elements.description.value,
     };
     const newTask = createNewTask(task);
     if (newTask) {
@@ -219,10 +219,16 @@ function addTask(event) {
 
 
 function toggleSidebar(show) {
- 
+ elements.hideSideBarBtn.style.display = show ? 'block' : 'none';
+ elements.showSideBarBtn.style.display = show ? 'none' : 'block';
+
+ elements.sidebar.style.display = show ? 'block' : 'none';
+ elements.main.style.display = show ? 'none' : 'block';
+
 }
 
 function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
  
 }
 
@@ -232,7 +238,7 @@ function openEditTaskModal(task) {
   // Set task details in modal inputs
   document.getElementById(title)
   document.getElementById(description)
-  document.getElementById(currentStatus)
+  document.getElementById(Status)
   
 
   // Get button elements from the task modal
@@ -241,21 +247,27 @@ const cancelAddTaskBtn=document.getElementById(cancel)
 
   // Call saveTaskChanges upon click of Save Changes button
   document.getElementById(saveChangesBtn).addEventListener('click', () => {
-    saveTaskChanges(task.id);
+    saveTaskChanges();
   });
 
   // Delete task using a helper function and close the task modal
-function deleteTask(taskId) {
-  closeModal.addEventListener('click', () => {
-    toggleModal(false, elements.editTaskModal);
-  });
+function deleteTask(){
+  const taskId=task.id;
+  deleteTask(taskId);
+  refreshTasksUI();
+}
+
 
   toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
 
 function saveTaskChanges(taskId) {
   // Get new user inputs
-  
+  const titleInput=document.getElementById(title);
+  const descriptionInput=document.getElementById(description);
+  const updatedStatus=document.getElementById(status);
+  const updatedPriority=document.getElementById(priority);
+  const updatedDueDate=document.getElementById(dueDate);
 
   // Create an object with the updated task details
 
