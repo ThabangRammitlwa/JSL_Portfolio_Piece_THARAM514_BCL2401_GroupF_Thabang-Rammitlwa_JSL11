@@ -1,5 +1,5 @@
 // TASK: import helper functions from utils
-import { getTasks,createNewTask,patchTask,putTask,deleteTask } from "./utils/taskFunctions";
+import { getTasks,createNewTask,putTask,deleteTask } from "./utils/taskFunctions";
 // TASK: import initialData
 import{initialData}from'./initialData.js';
 
@@ -20,8 +20,18 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
+  headerBoardName:document.getElementById("header-board-name"),
+  columnDivs: document.querySelectorAll('column'),
+  sideBar: document.querySelector('.side-bar'),
+  showSideBarBtn: document.getElementById('show-side-bar-btn'),
+  hideSideBarBtn: document.getElementById('hide-side-bar-btn'),
+  themeSwitch: document.getElementById('switch'),
+  filterDiv: document.getElementById('filterDiv'),
+  createNewTaskBtn: document.getElementById('add-task-modal-window'),
+  modalWindow: document.getElementById('new-task-modal-window'),
+  editTaskModal: document.querySelector('.edit-task-modal-window')
 
-}
+};
 
 let activeBoard = ""
 
@@ -193,7 +203,9 @@ function addTask(event) {
 
   //Assign user input to the task object
     const task = {
-      
+      addTask: elements.addTask.value,
+      dueDate: elements.dueDate.value,
+      priority: elements.priority.value,
     };
     const newTask = createNewTask(task);
     if (newTask) {
