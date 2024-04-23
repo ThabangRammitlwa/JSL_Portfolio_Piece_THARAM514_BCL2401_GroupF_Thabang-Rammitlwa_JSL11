@@ -17,23 +17,23 @@ function initializeData() {
     console.log('Data already exists in localStorage');
   }
 }
+initializeData();
 
 // TASK: Get elements from the DOM
 const elements = {
   headerBoardName:document.getElementById("header-board-name"),
   columnDivs: document.querySelectorAll('column-div'),
- // sideBar: document.querySelector('.side-bar'),
+  filterDiv: document.getElementById('filter-div'),
   showSideBarBtn: document.getElementById('show-side-bar-btn'),
   hideSideBarBtn: document.getElementById('hide-side-bar-btn'),
   themeSwitch: document.getElementById('switch'),
-  filterDiv: document.getElementById('filter-div'),
-  createNewTaskBtn: document.getElementById('add-task-modal-window'),
-  modalWindow: document.getElementById('new-task-modal-window'),
+  createNewTaskBtn: document.getElementById('create-task-btn'),
+  modalWindow: document.getElementById('modal-window'),
   editTaskModal: document.querySelector('.edit-task-modal-window')
 
 };
 
-let activeBoard = ""
+let activeBoard = "";
 
 // Extracts unique board names from tasks
 // TASK: FIX BUGS
@@ -53,19 +53,19 @@ function fetchAndDisplayBoardsAndTasks() {
 // Creates different boards in the DOM
 // TASK: Fix Bugs
 function displayBoards(boards) {
-  const boardsContainer = document.getElementById("boards-nav-links-div");
+  const boardsContainer = document.querySelector("#boards-nav-links-div");
   boardsContainer.innerHTML = ''; // Clears the container
   boards.forEach(board => {
     const boardElement = document.createElement("button");
     boardElement.textContent = board;
     boardElement.classList.add("board-btn");
-    boardElement.click ,() => { 
+    boardElement.addEventListener('click', () => { 
       elements.headerBoardName.textContent = board;
       filterAndDisplayTasksByBoard(board);
       activeBoard = board //assigns active board
       localStorage.setItem("activeBoard", JSON.stringify(activeBoard))
       styleActiveBoard(activeBoard)
-    };
+    });
     boardsContainer.appendChild(boardElement);
   });
 
