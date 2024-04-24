@@ -203,8 +203,20 @@ function addTask(event) {
   event.preventDefault(); 
 
   //Assign user input to the task object
+  
+  const task_id = JSON.parse(localStorage.getItem('id'));
+  const titleInput = elements.titleInput.value;
+  const descriptionInput = elements.descInput.value;
+  const selectStatus = elements.selectStatus.value;
+
+
     const task = {
-      
+      'id': task_id,
+	    'title': titleInput,
+	    'description': descriptionInput,
+	    'status': selectStatus,
+      'board': activeBoard,
+
     };
     const newTask = createNewTask(task);
     if (newTask) {
@@ -218,18 +230,25 @@ function addTask(event) {
 
 
 function toggleSidebar(show) {
- 
+  elements.sideBar.style.display = show? 'block' : 'none';
+  localStorage.setItem('showSideBar', show);
+
+
 }
 
 function toggleTheme() {
- 
+  document.body.classList.toggle('light-theme');
+  localStorage.setItem('light-theme', document.body.classList.contains('light-theme')? 'enabled' : 'disabled');
 }
 
 
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
-  
+  document.getElementById('title-input').value = task.title;
+  document.getElementById('description-input').value = task.description;
+  document.getElementById('status-select').value = task.status;
+
 
   // Get button elements from the task modal
 
