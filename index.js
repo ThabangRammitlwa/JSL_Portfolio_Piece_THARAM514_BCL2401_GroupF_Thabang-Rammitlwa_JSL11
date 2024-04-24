@@ -52,8 +52,6 @@ editTaskDescInput: document.getElementById('edit-task-desc-input'),
  
 };
 
-initializeData()
-
 let activeBoard = ""
 
 // Extracts unique board names from tasks
