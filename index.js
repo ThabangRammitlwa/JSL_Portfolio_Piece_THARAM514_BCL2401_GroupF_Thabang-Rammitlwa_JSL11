@@ -32,6 +32,7 @@ const elements = {
   hideSideBarBtn: document.getElementById('hide-side-bar-btn'),
   showSideBarBtn: document.getElementById('show-side-bar-btn'),
   header: document.getElementById('header'),
+  headerBoardName: document.getElementById('header-board-name'),
   dropdownBtn: document.getElementById('dropdownBtn'),
   addNewTaskBtn: document.getElementById('add-new-task-btn'),
   editBoardBtn: document.getElementById('edit-board-btn'),
