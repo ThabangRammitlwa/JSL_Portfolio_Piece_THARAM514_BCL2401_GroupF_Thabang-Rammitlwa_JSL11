@@ -239,7 +239,7 @@ function addTask(event) {
   //Assign user input to the task object
     const task_id = JSON.parse(localStorage.getItem('id'));
     const titleInput = elements.titleInput.value;
-    const descriptionInput = elements.descInput.value;
+    const descInput = elements.descInput.value;
     const selectStatus = elements.selectStatus.value;
 
     const task = {
@@ -342,7 +342,7 @@ function saveTaskChanges(taskId) {
   // Update task using a helper function
   patchTask(taskId, updatedTask);
  
-
+  putTask(taskId,updatedTask);
   // Close the modal and refresh the UI to reflect the changes
   location.reload();
   toggleModal(false, elements.editTaskModal);
