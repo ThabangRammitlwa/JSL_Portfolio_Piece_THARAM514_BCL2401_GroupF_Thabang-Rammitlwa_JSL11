@@ -10,8 +10,8 @@ import{initialData}from'./initialData.js';
 
 // Function checks if local storage already has data, if not it loads initialData to localStorage
 function initializeData() {
-  if (!localStorage.getItem('tasks',JSON.stringify)) {
-    localStorage.setItem('tasks', JSON.stringify(initializeData)); 
+  if (!localStorage.getItem('tasks')) {
+    localStorage.setItem('tasks', JSON.stringify(initialData)); 
     localStorage.setItem('showSideBar', 'true')
   } else {
     console.log('Data already exists in localStorage');
@@ -20,7 +20,6 @@ function initializeData() {
 initializeData();
 
 // TASK: Get elements from the DOM
-function getElements(){
 const elements = {
   headerBoardName:document.getElementById("header-board-name"),
   columnDivs: document.querySelectorAll('column-div'),
@@ -31,10 +30,7 @@ const elements = {
   createNewTaskBtn: document.getElementById('create-task-btn'),
   modalWindow: document.getElementById('modal-window'),
   editTaskModal: document.querySelector('.edit-task-modal-window')
-
 };
-return elements;
-}
 
 let activeBoard = "";
 
@@ -206,9 +202,9 @@ function addTask(event) {
 
   //Assign user input to the task object
   const task_id = JSON.parse(localStorage.getItem('id'));
-  const titleInput = elements.titleInput.value;
-  const descriptionInput = elements.descInput.value;
-  const selectStatus = elements.selectStatus.value;
+  const titleInput = elements('title-input').value;
+  const descriptionInput = elements('description-input').value;
+  const selectStatus = elements('status-select').value;
 
   const task = {
     'id': task_id,
@@ -225,6 +221,7 @@ function addTask(event) {
       event.target.reset();
       refreshTasksUI();
     }
+    location.reload();
 }
 
 
