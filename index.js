@@ -1,5 +1,5 @@
 // TASK: import helper functions from utils
-import { getTasks,createNewTask,putTask,deleteTask } from "./utils/taskFunctions";
+import { getTasks,deleteTask,patchTask,putTask,createNewTask } from './utils/taskFunctions.js';
 // TASK: import initialData
 import{initialData}from'./initialData.js';
 
@@ -17,20 +17,42 @@ function initializeData() {
     console.log('Data already exists in localStorage');
   }
 }
-
+initializeData()
 // TASK: Get elements from the DOM
 const elements = {
   headerBoardName: document.getElementById("header-board-name"),
-  columnDivs: document.querySelectorAll('column-div'),
+  columnDivs: document.querySelectorAll('.column-div'),
   filterDiv: document.getElementById('filter-div'),
-  showSideBarBtn: document.getElementById('show-side-bar-btn'),
+ showSideBarBtn: document.getElementById('show-side-bar-btn'),
   hideSideBarBtn: document.getElementById('hide-side-bar-btn'),
-  themeSwitch: document.getElementById('switch'),
-  createNewTaskBtn: document.getElementById('create-task-btn'),
+ themeSwitch: document.getElementById('switch'),
+ createNewTaskBtn: document.getElementById('create-task-btn'),
   modalWindow: document.getElementById('modal-window'),
-  editTaskModal: document.querySelector('.edit-task-modal-window')
+  editTaskModal: document.querySelector('.edit-task-modal-window'),
+ titleInput: document.getElementById('title-input'),
+  descriptionInput: document.getElementById('description-input'),
+  selectStatus: document.getElementById('select-status'),
+  sideBar: document.getElementById('side-bar'),
+  addNewTask: document.getElementById('add-new-task'),
+  sideBarDiv: document.getElementById('side-bar-div'),
+  sideLogoDiv: document.getElementById('logo'),
+  boardsNavLinks: document.getElementById('boards-nav-links'),
+ hearder: document.getElementById('header'),
+ deleteBoardBtn: document.getElementById('delete-board-btn'),
+dropdownBtn: document.getElementById('dropdown-btn'),
+editBoardBtn: document.getElementById('edit-board-btn'),
+tasksContainer: document.querySelector('.tasks-container'),
+cancelAddTaskBtn:document.getElementById('cancel-add-task-btn'),
+cancelEditBtn:document.getElementById('cancel-edit-btn'),
+deleteTaskBtn: document.getElementById('delet-task-btn'),
+editTaskDescInput: document.getElementById('edit-task-desc-input'),
+  editTaskTitleInput: document.getElementById('edit-task-title-input'),
+  editSelectStatus: document.getElementById('edit-select-status'),
+  editTaskForm: document.getElementById('edit-task-form'),
+ 
 };
 
+initializeData()
 
 let activeBoard = ""
 
@@ -206,7 +228,7 @@ function addTask(event) {
   
   const task_id = JSON.parse(localStorage.getItem('id'));
   const titleInput = elements.titleInput.value;
-  const descriptionInput = elements.descInput.value;
+  const descriptionInput = elements.descriptionInput.value;
   const selectStatus = elements.selectStatus.value;
 
 
@@ -269,18 +291,27 @@ function openEditTaskModal(task) {
 
 function saveTaskChanges(taskId) {
   // Get new user inputs
-  
+  const newTitle = document.getElementById('title-input').value;
+  const newDescription = document.getElementById('description-input').value;
+  const newStatus = document.getElementById('select-status').value;
 // Create an object with the updated task details
-
+const updatedTask = {
+  id: taskId,
+  title: newTitle,
+  description: newDescription,
+  status: newStatus,
+};
 
   // Update task using a hlper functoin
  
-
+  patchTask(updatedTask)
+  .then(() => {
   // Close the modal and refresh the UI to reflect the changes
-
+  toggleModal(false, elements.editTaskModal);
+  refreshTasksUI()
   refreshTasksUI();
+})
 }
-
 /*************************************************************************************************************************************************/
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -294,4 +325,8 @@ function init() {
   const isLightTheme = localStorage.getItem('light-theme') === 'enabled';
   document.body.classList.toggle('light-theme', isLightTheme);
   fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
+};
+
+function setupEventListeners() {
+
 }
