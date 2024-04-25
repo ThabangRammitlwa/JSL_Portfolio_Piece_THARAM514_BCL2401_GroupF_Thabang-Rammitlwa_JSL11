@@ -13,3 +13,5 @@ Data Persistence: By utilizing the browser's localStorage feature, tasks and boa
 This was a difficult challenge for me,I learned how important it is to know the basics of JavaScript and how elements play a huge role when creating an application. This also showed me how good my debugging skills are better than my coding skills and how I have to work 2 time harder on my coding skills.
 
 Stressful as the project was, I'm happy with the lesson experience, it kinda of gave me a real work place exprience and the kind of pressure that one will endure in the projects.
+
+Attached link of the loom Presantation:https://www.loom.com/share/a5c76293cf8a404e86e7ad38143780ad?sid=49c4c862-cb29-447f-b3f7-15bf47ed717d
